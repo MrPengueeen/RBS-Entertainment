@@ -42,7 +42,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       // Image.asset('assets/images/app_logo.jpg',
                       //     width: 150, height: 150, fit: BoxFit.contain),
                       CustomTextField(
-                        hintText: "Your Email",
+                        hintText: "Email / Phone Number",
                         icon: Icons.alternate_email,
                         onChanged: (value) {
                           _email = value;
