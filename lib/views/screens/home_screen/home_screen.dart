@@ -1,3 +1,5 @@
+import 'package:RBS/colors.dart';
+import 'package:RBS/views/screens/home_screen/movie_tab.dart';
 import 'package:RBS/views/shared_widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -13,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
+          backgroundColor: kPrimaryColor,
           appBar: CustomAppBar(),
           // appBar: AppBar(
           //   leading: Image.asset(
@@ -29,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
           body: SafeArea(
             child: TabBarView(
               children: [
-                Container(child: Icon(Icons.person)),
+                MovieTab(),
                 Container(child: Icon(Icons.download_done_outlined)),
                 Container(child: Icon(Icons.person))
               ],

@@ -29,6 +29,7 @@ dependencies:
   cached_network_image: ^2.5.0
   velocity_x: ^1.0.1
   persistent_bottom_nav_bar: ^3.1.0
+  carousel_slider: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

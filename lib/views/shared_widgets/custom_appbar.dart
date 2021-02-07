@@ -34,7 +34,7 @@ class _CustomAppBarState extends State<CustomAppBar>
         [
           Image.asset(
             'assets/logos/rbs_logo.png',
-          ).pLTRB(10, 16, 16, 16),
+          ).pLTRB(20, 16, 16, 16),
           TabBar(isScrollable: true, labelColor: Colors.white, tabs: [
             Tab(
               text: 'Movie',
@@ -46,7 +46,7 @@ class _CustomAppBarState extends State<CustomAppBar>
               text: 'Series',
             ),
           ]),
-          Image.asset('assets/icons/bell.png').pLTRB(16, 16, 10, 16),
+          Image.asset('assets/icons/bell.png').pLTRB(16, 16, 20, 16),
         ],
         alignment: MainAxisAlignment.spaceBetween,
         axisSize: MainAxisSize.min,
