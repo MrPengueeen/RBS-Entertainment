@@ -42,25 +42,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CustomTextField(
-                      hintText: "Your Name",
+                      hintText: "Name",
                       icon: Icons.person,
                       onChanged: (value) => _name = value,
                       validator: (value) =>
                           value.isEmpty ? 'This field is required' : null,
                     ),
                     CustomTextField(
-                      hintText: "Your Phone Number",
+                      hintText: "Phone Number",
                       icon: Icons.phone,
                       onChanged: (value) => _phone = value,
                       validator: (value) =>
                           value.isEmpty ? 'This field is required' : null,
                     ),
                     CustomTextField(
-                      hintText: "Your Email",
+                      hintText: "Email (Optional)",
                       icon: Icons.alternate_email,
                       onChanged: (value) => _email = value,
-                      validator: (value) =>
-                          value.isEmpty ? 'This field is required' : null,
+                      // validator: (value) =>
+                      //     value.isEmpty ? 'This field is required' : null,
                     ),
                     CustomTextField(
                       isPassword: true,
@@ -88,11 +88,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           });
                           //context.showLoading(msg: 'Signing up');
                           var request = {
-                            'email': _email.trim(),
                             'password': _password,
                             'name': _name,
                             'phone': _phone,
                           };
+                          if (_email.trim().isNotEmpty) {
+                            request['email'] = _email.trim();
+                          }
                           registerUser(request).then((response) {
                             if (response['details'] ==
                                 "User successfully registered to the RBS Entertainment") {
