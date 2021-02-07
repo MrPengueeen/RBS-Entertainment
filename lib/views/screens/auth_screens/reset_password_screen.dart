@@ -1,9 +1,8 @@
 import 'dart:ui';
 
 import 'package:RBS/colors.dart';
-import 'package:RBS/services/network/api_handlers.dart';
 import 'package:RBS/services/network/rest_apis.dart';
-import 'package:RBS/views/screens/auth_screens/reset_password_screen.dart';
+import 'package:RBS/views/screens/auth_screens/confirm_password_screen.dart';
 import 'package:RBS/views/screens/auth_screens/sign_up_screen.dart';
 import 'package:RBS/views/shared_widgets/custom_button.dart';
 import 'package:RBS/views/shared_widgets/custom_textfield.dart';
@@ -11,19 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class SignInScreen extends StatefulWidget {
+class ResetPasswordScreen extends StatefulWidget {
   @override
-  _SignInScreenState createState() => _SignInScreenState();
+  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
-  String _email = '';
-
-  String _password = '';
-
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   bool isLoading = false;
-
   final _formKey = GlobalKey<FormState>();
+  String _username = '';
 
   @override
   Widget build(BuildContext context) {
@@ -46,27 +41,16 @@ class _SignInScreenState extends State<SignInScreen> {
                         hintText: "Email / Phone Number",
                         icon: Icons.alternate_email,
                         onChanged: (value) {
-                          _email = value;
+                          _username = value;
                         },
                         validator: (value) =>
                             value.isEmpty ? 'This field is required' : null,
                       ),
-                      CustomTextField(
-                        isPassword: true,
-                        hintText: "Password",
-                        icon: Icons.lock_outline,
-                        onChanged: (value) {
-                          _password = value;
-                        },
-                        validator: (value) => value.length < 6
-                            ? 'Password must be at least 6 characters long'
-                            : null,
-                      ),
+
                       CustomButton(
-                          text: "SIGN IN",
+                          text: "SEND OTP",
                           press: () async {
                             if (_formKey.currentState.validate()) {
-                              setBool(LOGGED_IN, false);
                               hideKeyboard(context);
 
                               setState(() {
@@ -74,18 +58,15 @@ class _SignInScreenState extends State<SignInScreen> {
                               });
 
                               var request = {
-                                'username': _email.trim(),
-                                'password': _password
+                                'username': _username.trim(),
                               };
 
-                              signInUser(request).then((response) {
-                                setString(ACCESS, response['token']);
-                                setBool(LOGGED_IN, true);
-                                setString(USERNAME, response['username']);
-                                VxToast.show(context, msg: 'Login Successful');
+                              resetPassword(request).then((response) {
+                                VxToast.show(context, msg: 'OTP Sent');
                                 setState(() {
                                   isLoading = false;
                                 });
+                                context.nextPage(ConfirmPasswordScreen());
                               }).catchError((error) {
                                 // VxToast.show(context,
                                 //     msg: '${error.toString()}');
@@ -101,13 +82,6 @@ class _SignInScreenState extends State<SignInScreen> {
                           .make()
                           .onInkTap(
                               () => context.nextReplacementPage(SignUpScreen()))
-                          .p(10),
-                      Text("Forgot password?")
-                          .text
-                          .white
-                          .make()
-                          .onInkTap(
-                              () => context.nextPage(ResetPasswordScreen()))
                           .p(10),
                     ],
                   ),
