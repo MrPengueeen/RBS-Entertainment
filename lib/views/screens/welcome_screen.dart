@@ -16,7 +16,7 @@ class WelcomeScreen extends StatelessWidget {
         // Image.asset('assets/images/app_logo.jpg',
         //     width: 150, height: 150, fit: BoxFit.contain),
         CustomButton(
-            text: "SIGN IN",
+            text: "SIGN In",
             press: () => context.nextReplacementPage(SignInScreen())),
         CustomButton(
             text: "REGISTER",

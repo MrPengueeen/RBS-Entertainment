@@ -5,6 +5,7 @@ import 'package:RBS/services/network/api_handlers.dart';
 import 'package:RBS/services/network/rest_apis.dart';
 import 'package:RBS/views/screens/auth_screens/reset_password_screen.dart';
 import 'package:RBS/views/screens/auth_screens/sign_up_screen.dart';
+import 'package:RBS/views/screens/bottom_navbar_screen.dart';
 import 'package:RBS/views/shared_widgets/custom_button.dart';
 import 'package:RBS/views/shared_widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -86,6 +87,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 setState(() {
                                   isLoading = false;
                                 });
+                                context.nextAndRemoveUntilPage(
+                                    BottomNavigationBarScreen());
                               }).catchError((error) {
                                 // VxToast.show(context,
                                 //     msg: '${error.toString()}');

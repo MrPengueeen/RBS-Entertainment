@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.10.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -28,6 +28,7 @@ dependencies:
   nb_utils: ^3.3.0+7
   cached_network_image: ^2.5.0
   velocity_x: ^1.0.1
+  persistent_bottom_nav_bar: ^3.1.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -43,6 +44,13 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  assets:
+    - assets/logos/
+    - assets/icons/
+  fonts:
+    - family:  CustomIcons
+      fonts:
+       - asset: assets/fonts/CustomIcons.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

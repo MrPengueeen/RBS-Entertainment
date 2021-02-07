@@ -1,8 +1,11 @@
 import 'package:RBS/colors.dart';
 import 'package:RBS/constants.dart';
+import 'package:RBS/services/network/api_handlers.dart';
+import 'package:RBS/views/screens/bottom_navbar_screen.dart';
 import 'package:RBS/views/screens/welcome_screen.dart';
 import 'package:RBS/views/shared_widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +19,10 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 4), () async {
-      context.nextReplacementPage(WelcomeScreen());
+      bool isLoggedIn = await getBool(LOGGED_IN, defaultValue: false);
+
+      context.nextReplacementPage(
+          isLoggedIn ? BottomNavigationBarScreen() : WelcomeScreen());
     });
   }
 
