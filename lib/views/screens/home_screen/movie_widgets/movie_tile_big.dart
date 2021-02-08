@@ -22,7 +22,7 @@ class MovieTileBigWidget extends StatelessWidget {
         Stack(
           children: [
             Container(
-              height: 360.0,
+              height: 330.0,
               width: 245.0,
               decoration: BoxDecoration(
                   image: DecorationImage(
@@ -46,11 +46,16 @@ class MovieTileBigWidget extends StatelessWidget {
             )
           ],
         ),
-        Text(name).text.xl.bold.white.make().pOnly(bottom: 10),
-        Text(
-          genre.join(', '),
-          style: TextStyle(color: kColorWhite),
-        ).pOnly(bottom: 10),
+        SizedBox(
+            width: 220,
+            child: Text(name).text.xl.bold.white.make().pOnly(bottom: 10)),
+        SizedBox(
+          width: 220,
+          child: Text(
+            genre.join(', '),
+            style: TextStyle(color: kColorWhite),
+          ).pOnly(bottom: 10),
+        ),
         HStack([
           Icon(
             Icons.star,

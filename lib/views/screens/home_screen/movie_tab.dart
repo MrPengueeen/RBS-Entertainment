@@ -1,5 +1,5 @@
 import 'package:RBS/colors.dart';
-import 'package:RBS/views/shared_widgets/movie_tile_small.dart';
+import 'package:RBS/views/screens/home_screen/movie_widgets/movie_tile_small.dart';
 import 'package:RBS/views/shared_widgets/shared_widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,17 @@ class _MovieTabState extends State<MovieTab> {
                 MovieTileBigWidget(
                   rating: '4.8',
                   reviews: 36,
-                  genre: ['Action', 'Adventure', 'Thriller'],
+                  genre: [
+                    'Action',
+                    'Adventure',
+                    'Thriller',
+                    'Lots',
+                    'Of',
+                    'Genres',
+                    'For',
+                    'UI',
+                    'Test'
+                  ],
                   name: 'Beauty And The Beast (2017)',
                   image:
                       'https://posteritati.com/posters/000/000/051/575/beauty-and-the-beast-sm-web.jpg',
@@ -74,7 +84,8 @@ class _MovieTabState extends State<MovieTab> {
             ),
             HStack([
               MovieTileSmallWidget(
-                  name: 'Avengers Infinity (2018)',
+                  name:
+                      'Avengers Infinity (2018) LONG LONG LONG LONG LONG LONG LONG LONG LONG TEXT',
                   image:
                       'https://i.pinimg.com/originals/f9/90/12/f99012184e6ccc9769c02958c15bc38c.jpg'),
               MovieTileSmallWidget(

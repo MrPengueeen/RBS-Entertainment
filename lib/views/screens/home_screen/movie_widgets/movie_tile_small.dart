@@ -29,7 +29,7 @@ class MovieTileSmallWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30)),
           ).pOnly(bottom: 5),
           SizedBox(
-              width: 180,
+              width: 150,
               child: Text(name).text.xs.bold.white.make().pOnly(bottom: 10)),
         ]));
   }
