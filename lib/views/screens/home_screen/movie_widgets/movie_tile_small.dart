@@ -1,3 +1,4 @@
+import 'package:RBS/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -30,7 +31,13 @@ class MovieTileSmallWidget extends StatelessWidget {
           ).pOnly(bottom: 5),
           SizedBox(
               width: 150,
-              child: Text(name).text.xs.bold.white.make().pOnly(bottom: 10)),
+              child: Text(name,
+                      style: TextStyle(color: kColorWhite.withOpacity(0.8)))
+                  .text
+                  .xs
+                  .bold
+                  .make()
+                  .pOnly(bottom: 10)),
         ]));
   }
 }

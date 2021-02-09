@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'RBS Entertainment',
       theme: ThemeData(
+        fontFamily: 'OpenSans',
         primaryColor: kPrimaryColor,
         accentColor: kAccentColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,

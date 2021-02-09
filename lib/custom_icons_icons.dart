@@ -6,10 +6,10 @@
 /// following in your pubspec.yaml
 ///
 /// flutter:
-//  fonts:
-//   - family:  CustomIcons
-//     fonts:
-//      - asset: fonts/CustomIcons.ttf
+///   fonts:
+///    - family:  CustomIcons
+///      fonts:
+///       - asset: fonts/CustomIcons.ttf
 ///
 ///
 ///
@@ -29,4 +29,10 @@ class CustomIcons {
       IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData search =
       IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData play =
+      IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData ic24download =
+      IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData share =
+      IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

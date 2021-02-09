@@ -53,7 +53,7 @@ class MovieTileBigWidget extends StatelessWidget {
           width: 220,
           child: Text(
             genre.join(', '),
-            style: TextStyle(color: kColorWhite),
+            style: TextStyle(color: kColorWhite.withOpacity(0.7)),
           ).pOnly(bottom: 10),
         ),
         HStack([
@@ -63,7 +63,7 @@ class MovieTileBigWidget extends StatelessWidget {
           ),
           Text(
             '${rating} (${reviews} Reviews)',
-            style: TextStyle(color: kColorWhite),
+            style: TextStyle(color: kColorWhite.withOpacity(0.7)),
           )
         ])
       ],

@@ -3,6 +3,7 @@ import 'package:RBS/custom_icons_icons.dart';
 import 'package:RBS/views/screens/auth_screens/menu_screen/menu_screen.dart';
 import 'package:RBS/views/screens/downloads_screen/download_screen.dart';
 import 'package:RBS/views/screens/home_screen/home_screen.dart';
+import 'package:RBS/views/screens/home_screen/movie_details_screen.dart';
 import 'package:RBS/views/screens/search_screen/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class BottomNavigationBarScreen extends StatelessWidget {
       PersistentTabController(initialIndex: 0);
 
   List<Widget> _buildScreens() {
-    return [HomeScreen(), SearchScreen(), DownloadsScreen(), MenuScreen()];
+    return [HomeScreen(), SearchScreen(), MovieDetailsScreen(), MenuScreen()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
