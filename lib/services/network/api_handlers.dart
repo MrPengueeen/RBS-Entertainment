@@ -49,7 +49,7 @@ Future<Response> getRequest(String endPoint,
       response = await get('$BaseUrl$endPoint');
     }
 
-    //print('Response: ${response.statusCode} ${response.body}');
+    print('Response: ${response.statusCode} ${response.body}');
     return response;
   } else {
     throw noInternetMsg;

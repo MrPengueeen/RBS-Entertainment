@@ -1,4 +1,5 @@
 import 'package:RBS/colors.dart';
+import 'package:RBS/models/menu_model.dart';
 import 'package:RBS/views/screens/home_screen/movie_widgets/movie_tile_small.dart';
 import 'package:RBS/views/shared_widgets/shared_widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -6,6 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class MovieTab extends StatefulWidget {
+  final MenuModel menu;
+
+  const MovieTab({Key key, this.menu}) : super(key: key);
+
   @override
   _MovieTabState createState() => _MovieTabState();
 }

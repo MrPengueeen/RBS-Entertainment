@@ -22,3 +22,9 @@ Future confirmPassword(Map request) async {
   return handleResponse(
       await postRequest('auth/reset-password/', request, requireToken: false));
 }
+
+/// Contents
+
+Future getMenuApi() async {
+  return handleResponse(await getRequest('content/menu/', bearerToken: true));
+}

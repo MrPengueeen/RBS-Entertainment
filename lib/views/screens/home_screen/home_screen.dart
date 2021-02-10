@@ -1,10 +1,15 @@
 import 'package:RBS/colors.dart';
+import 'package:RBS/models/menu_model.dart';
 import 'package:RBS/views/screens/home_screen/movie_tab.dart';
 import 'package:RBS/views/shared_widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeScreen extends StatefulWidget {
+  final List<MenuModel> menuItems;
+
+  const HomeScreen({Key key, this.menuItems}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -13,10 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
+        length: widget.menuItems.length,
         child: Scaffold(
           backgroundColor: kPrimaryColor,
-          appBar: CustomAppBar(),
+          appBar: CustomAppBar(
+            menuItems: widget.menuItems,
+          ),
           // appBar: AppBar(
           //   leading: Image.asset(
           //     'assets/logos/rbs_logo.png',
@@ -31,12 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
           // ),
           body: SafeArea(
             child: TabBarView(
-              children: [
-                MovieTab(),
-                Container(child: Icon(Icons.download_done_outlined)),
-                Container(child: Icon(Icons.person))
-              ],
-            ),
+                children: widget.menuItems
+                    .map((e) => MovieTab(
+                          menu: e,
+                        ))
+                    .toList()),
           ),
         ));
   }
