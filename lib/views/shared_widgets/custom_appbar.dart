@@ -16,15 +16,12 @@ class CustomAppBar extends StatefulWidget with PreferredSizeWidget {
   _CustomAppBarState createState() => _CustomAppBarState();
 }
 
-class _CustomAppBarState extends State<CustomAppBar>
-    with TickerProviderStateMixin {
-  TabController _controller;
-
+class _CustomAppBarState extends State<CustomAppBar> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller = TabController(length: 3, vsync: this);
+    //_controller = TabController(length: 3, vsync: this);
   }
 
   @override

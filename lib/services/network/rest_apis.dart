@@ -28,3 +28,8 @@ Future confirmPassword(Map request) async {
 Future getMenuApi() async {
   return handleResponse(await getRequest('content/menu/', bearerToken: true));
 }
+
+Future getMoviesByMenu(int menuId) async {
+  return handleResponse(
+      await getRequest('content/movie/?menu=$menuId', bearerToken: true));
+}

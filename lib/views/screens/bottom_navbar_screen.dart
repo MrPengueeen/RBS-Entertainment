@@ -50,7 +50,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         menuItems: menuItems,
       ),
       SearchScreen(),
-      MovieDetailsScreen(),
+      DownloadsScreen(),
       MenuScreen()
     ];
   }
