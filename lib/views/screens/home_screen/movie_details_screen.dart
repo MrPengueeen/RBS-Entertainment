@@ -2,8 +2,10 @@ import 'package:RBS/colors.dart';
 import 'package:RBS/custom_icons_icons.dart';
 import 'package:RBS/models/movie_model.dart';
 import 'package:RBS/views/screens/home_screen/movie_widgets/movie_details_banner.dart';
+import 'package:RBS/views/screens/home_screen/movie_widgets/youtube_player_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   final MovieModel movie;
@@ -37,7 +39,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              MovieBannerWidget(),
+              MovieBannerWidget(movie: widget.movie),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -107,24 +109,34 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     ),
                     Divider(
                       color: kColorWhite.withOpacity(0.4),
-                    ),
+                    ).pOnly(bottom: 15),
                     HStack([
-                      HStack([
-                        VxCircle(
-                            radius: 50,
-                            child: Icon(
-                              CustomIcons.play,
-                              color: kColorText,
-                            ),
-                            backgroundColor: kPrimaryColor,
-                            border: Border.all(color: kColorText)),
-                        Text('Watch Trailer',
-                                style: TextStyle(
-                                    color: kColorWhite.withOpacity(0.7)))
-                            .text
-                            .make()
-                            .pOnly(left: 10)
-                      ]),
+                      InkWell(
+                        onTap: () {
+                          if (widget.movie.trailer != null) {
+                            playTrailer();
+                          } else {
+                            VxToast.show(context,
+                                msg: 'No trailers are available for this show');
+                          }
+                        },
+                        child: HStack([
+                          VxCircle(
+                              radius: 50,
+                              child: Icon(
+                                CustomIcons.play,
+                                color: kColorText,
+                              ),
+                              backgroundColor: kPrimaryColor,
+                              border: Border.all(color: kColorText)),
+                          Text('Watch Trailer',
+                                  style: TextStyle(
+                                      color: kColorWhite.withOpacity(0.7)))
+                              .text
+                              .make()
+                              .pOnly(left: 10)
+                        ]),
+                      ),
                       HStack([
                         VxCircle(
                             radius: 50,
@@ -174,21 +186,19 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                             style: TextStyle(color: kColorText),
                           ),
                         ),
-                        bigDes
-                            ? InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    seeMore = !seeMore;
-                                  });
-                                },
-                                child: Text(seeMore ? 'See More' : 'See Less')
-                                    .text
-                                    .white
-                                    .bold
-                                    .make()
-                                    .pOnly(left: 10),
-                              )
-                            : Container(),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              seeMore = !seeMore;
+                            });
+                          },
+                          child: Text(seeMore ? 'Read More' : 'Read Less')
+                              .text
+                              .white
+                              .bold
+                              .make()
+                              .pOnly(left: 10),
+                        ).visible(bigDes)
                       ],
                       crossAlignment: CrossAxisAlignment.end,
                     ).pOnly(bottom: 15),
@@ -203,5 +213,24 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
         ),
       ),
     );
+  }
+
+  playTrailer() {
+    return showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            backgroundColor: kPrimaryColor,
+            insetPadding: EdgeInsets.all(5.0),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30.0))),
+            contentPadding: EdgeInsets.all(0.0),
+            content: Container(
+              height: 400,
+              width: MediaQuery.of(context).size.width,
+              child: YoutubePlayerWidget(url: widget.movie.trailer),
+            ),
+          );
+        });
   }
 }

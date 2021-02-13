@@ -41,16 +41,16 @@ class _MovieTabState extends State<MovieTab>
           .toList();
       latestMovies = movies;
       latestMovies.sort((b, a) => a.year.compareTo(b.year));
-      print('Year: ');
-      latestMovies.forEach((element) {
-        print('${element.title}: ${element.year}');
-      });
+      // print('Year: ');
+      // latestMovies.forEach((element) {
+      //   print('${element.title}: ${element.year}');
+      // });
       popularMovies = movies;
       popularMovies.sort((b, a) => a.rating.compareTo(b.rating));
-      print('Rating: ');
-      popularMovies.forEach((element) {
-        print('${element.title}: ${element.rating}');
-      });
+      // print('Rating: ');
+      // popularMovies.forEach((element) {
+      //   print('${element.title}: ${element.rating}');
+      // });
       setState(() {
         isLoading = false;
       });

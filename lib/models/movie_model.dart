@@ -8,6 +8,8 @@ class MovieModel {
   int rating;
   String description;
   String released;
+  String trailer;
+  String video;
 
   MovieModel(
       {this.description,
@@ -18,20 +20,27 @@ class MovieModel {
       this.title,
       this.year,
       this.menuId,
-      this.released});
+      this.released,
+      this.trailer,
+      this.video});
 
   factory MovieModel.fromJson(json) {
     List<String> genreList =
         (json['genre'] as List).map((e) => e['name'].toString()).toList();
     return MovieModel(
-        id: json['id'],
-        title: json['title'],
-        duration: json['duration'],
-        menuId: json['menu']['id'],
-        genre: genreList,
-        year: json['publishing_year'],
-        rating: json['rating'],
-        description: json['description'],
-        released: json['released']);
+      id: json['id'],
+      title: json['title'],
+      duration: json['duration'],
+      menuId: json['menu']['id'],
+      genre: genreList,
+      year: json['publishing_year'],
+      rating: json['rating'],
+      description: json['description'],
+      released: json['released'],
+      trailer: json['trailer_of_reference_movie'] != null
+          ? json['trailer_of_reference_movie']['video_url']
+          : null,
+      video: json['video_url'],
+    );
   }
 }

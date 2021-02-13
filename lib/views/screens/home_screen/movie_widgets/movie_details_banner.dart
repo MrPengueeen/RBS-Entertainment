@@ -1,8 +1,15 @@
 import 'package:RBS/colors.dart';
+import 'package:RBS/models/movie_model.dart';
+import 'package:RBS/views/screens/home_screen/movie_widgets/play_movie.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class MovieBannerWidget extends StatefulWidget {
+  final MovieModel movie;
+
+  const MovieBannerWidget({Key key, this.movie}) : super(key: key);
+
   @override
   _MovieBannerWidgetState createState() => _MovieBannerWidgetState();
 }
@@ -40,13 +47,16 @@ class _MovieBannerWidgetState extends State<MovieBannerWidget> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  VxCircle(
-                    backgroundColor: kColorRed,
-                    radius: 50,
-                    child: Icon(
-                      Icons.play_arrow_outlined,
-                      color: kColorWhite,
-                      size: 40,
+                  InkWell(
+                    onTap: playMovie,
+                    child: VxCircle(
+                      backgroundColor: kColorRed,
+                      radius: 50,
+                      child: Icon(
+                        Icons.play_arrow_outlined,
+                        color: kColorWhite,
+                        size: 40,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -71,6 +81,15 @@ class _MovieBannerWidgetState extends State<MovieBannerWidget> {
           ),
         ],
       ),
+    );
+  }
+
+  playMovie() {
+    pushNewScreen(
+      context,
+      screen: PlayMovieScreen(url: widget.movie.video),
+      withNavBar: false, // OPTIONAL VALUE. True by default.
+      pageTransitionAnimation: PageTransitionAnimation.cupertino,
     );
   }
 }
