@@ -19,10 +19,9 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 4), () async {
-      bool isLoggedIn = await getBool(LOGGED_IN, defaultValue: false);
+      // bool isLoggedIn = await getBool(LOGGED_IN, defaultValue: false);
 
-      context.nextReplacementPage(
-          isLoggedIn ? BottomNavigationBarScreen() : WelcomeScreen());
+      context.nextReplacementPage(BottomNavigationBarScreen());
     });
   }
 

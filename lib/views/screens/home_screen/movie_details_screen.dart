@@ -129,12 +129,15 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                               ),
                               backgroundColor: kPrimaryColor,
                               border: Border.all(color: kColorText)),
-                          Text('Watch Trailer',
-                                  style: TextStyle(
-                                      color: kColorWhite.withOpacity(0.7)))
-                              .text
-                              .make()
-                              .pOnly(left: 10)
+                          SizedBox(
+                            width: 80,
+                            child: Text('Watch Trailer',
+                                    style: TextStyle(
+                                        color: kColorWhite.withOpacity(0.7)))
+                                .text
+                                .make()
+                                .pOnly(left: 10),
+                          )
                         ]),
                       ),
                       HStack([
@@ -146,12 +149,15 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                             ),
                             backgroundColor: kPrimaryColor,
                             border: Border.all(color: kColorText)),
-                        Text('Download',
-                                style: TextStyle(
-                                    color: kColorWhite.withOpacity(0.7)))
-                            .text
-                            .make()
-                            .pOnly(left: 10)
+                        SizedBox(
+                          width: 80,
+                          child: Text('Download',
+                                  style: TextStyle(
+                                      color: kColorWhite.withOpacity(0.7)))
+                              .text
+                              .make()
+                              .pOnly(left: 10),
+                        )
                       ]),
                       HStack([
                         VxCircle(
@@ -162,14 +168,17 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                             ),
                             backgroundColor: kPrimaryColor,
                             border: Border.all(color: kColorText)),
-                        Text('Share',
-                                style: TextStyle(
-                                    color: kColorWhite.withOpacity(0.7)))
-                            .text
-                            .make()
-                            .pOnly(left: 10)
+                        SizedBox(
+                          width: 80,
+                          child: Text('Share',
+                                  style: TextStyle(
+                                      color: kColorWhite.withOpacity(0.7)))
+                              .text
+                              .make()
+                              .pOnly(left: 10),
+                        )
                       ])
-                    ], alignment: MainAxisAlignment.spaceBetween)
+                    ], alignment: MainAxisAlignment.spaceEvenly)
                         .pOnly(bottom: 15),
                     Divider(
                       color: kColorWhite.withOpacity(0.4),

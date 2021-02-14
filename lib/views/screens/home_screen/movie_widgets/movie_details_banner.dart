@@ -1,7 +1,10 @@
 import 'package:RBS/colors.dart';
 import 'package:RBS/models/movie_model.dart';
+import 'package:RBS/services/network/api_handlers.dart';
 import 'package:RBS/views/screens/home_screen/movie_widgets/play_movie.dart';
+import 'package:RBS/views/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -84,10 +87,13 @@ class _MovieBannerWidgetState extends State<MovieBannerWidget> {
     );
   }
 
-  playMovie() {
+  playMovie() async {
+    bool isLoggedIn = await getBool(LOGGED_IN);
     pushNewScreen(
       context,
-      screen: PlayMovieScreen(url: widget.movie.video),
+      screen: isLoggedIn
+          ? PlayMovieScreen(url: widget.movie.video)
+          : WelcomeScreen(),
       withNavBar: false, // OPTIONAL VALUE. True by default.
       pageTransitionAnimation: PageTransitionAnimation.cupertino,
     );
