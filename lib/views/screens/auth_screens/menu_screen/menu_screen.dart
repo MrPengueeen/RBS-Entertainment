@@ -1,5 +1,6 @@
 import 'package:RBS/colors.dart';
 import 'package:RBS/services/network/api_handlers.dart';
+import 'package:RBS/views/screens/auth_screens/menu_screen/subscription_screen.dart';
 import 'package:RBS/views/screens/bottom_navbar_screen.dart';
 import 'package:RBS/views/screens/welcome_screen.dart';
 import 'package:RBS/views/shared_widgets/button_widget.dart';
@@ -39,6 +40,10 @@ class _MenuScreenState extends State<MenuScreen> {
         [
           CustomButtonWidget(
             text: 'Subscription',
+            press: () {
+              pushNewScreen(context,
+                  screen: SubscriptionScreen(), withNavBar: false);
+            },
           ),
           CustomButtonWidget(
             press: () async {

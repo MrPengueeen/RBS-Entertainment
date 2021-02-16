@@ -32,6 +32,8 @@ dependencies:
   carousel_slider: ^3.0.0
   youtube_player_flutter: ^7.0.0+7
   flutter_windowmanager: ^0.0.2
+  webview_flutter: ^1.0.7
+  flutter_html: ^1.2.0
 
 
   # The following adds the Cupertino Icons font to your application.

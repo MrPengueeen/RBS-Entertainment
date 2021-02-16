@@ -26,10 +26,30 @@ Future confirmPassword(Map request) async {
 /// Contents
 
 Future getMenuApi() async {
-  return handleResponse(await getRequest('content/menu/', bearerToken: true));
+  return handleResponse(await getRequest('content/menu/', bearerToken: false));
 }
 
 Future getMoviesByMenu(int menuId) async {
   return handleResponse(
-      await getRequest('content/movie/?menu=$menuId', bearerToken: true));
+      await getRequest('content/movie/?menu=$menuId', bearerToken: false));
+}
+
+/// Subscription
+
+Future getSubscriptionPackages() async {
+  return handleResponse(
+      await getRequest('subscription/subscription_plans/', bearerToken: false));
+}
+
+/// Transaction
+
+Future getTransactionData(int planId, String price) async {
+  return handleResponse(await getRequest('transection/checkout/$planId/$price',
+      bearerToken: true));
+}
+
+Future getTransactionStatus(Map request) async {
+  return handleResponse(await postRequest(
+      'transection/return_url_response', request,
+      bearerToken: true));
 }
