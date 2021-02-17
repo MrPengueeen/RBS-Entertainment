@@ -32,6 +32,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kPrimaryColor,
       body: SingleChildScrollView(
@@ -122,7 +123,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                         },
                         child: HStack([
                           VxCircle(
-                              radius: 50,
+                              radius: size.width / 12.5,
                               child: Icon(
                                 CustomIcons.play,
                                 color: kColorText,
@@ -142,7 +143,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                       ),
                       HStack([
                         VxCircle(
-                            radius: 50,
+                            radius: size.width / 12.5,
                             child: Icon(
                               CustomIcons.download,
                               color: kColorText,
@@ -161,7 +162,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                       ]),
                       HStack([
                         VxCircle(
-                            radius: 50,
+                            radius: size.width / 12.5,
                             child: Icon(
                               CustomIcons.share,
                               color: kColorText,

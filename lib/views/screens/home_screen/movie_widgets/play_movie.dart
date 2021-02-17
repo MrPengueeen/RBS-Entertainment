@@ -19,7 +19,7 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
 
   @override
   void initState() {
-    disableScreenRecord();
+    // disableScreenRecord();
     super.initState();
   }
 

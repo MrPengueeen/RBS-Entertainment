@@ -1,7 +1,9 @@
 import 'package:RBS/colors.dart';
+import 'package:RBS/custom_icons_icons.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final String hintText;
   final IconData icon;
   final ValueChanged<String> onChanged;
@@ -22,31 +24,69 @@ class CustomTextField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _CustomTextFieldState createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  bool hidePass;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    hidePass = widget.isPassword;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      width: MediaQuery.of(context).size.width * 0.8,
+      //margin: EdgeInsets.symmetric(vertical: 5),
+      padding: EdgeInsets.symmetric(vertical: 5),
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: kSecondaryColor,
-        borderRadius: BorderRadius.circular(30),
+        //color: kPrimaryColor,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
-        controller: controller,
-        obscureText: isPassword ? true : false,
-        initialValue: initialValue,
-        validator: validator,
-        onChanged: onChanged,
+        controller: widget.controller,
+        obscureText: hidePass,
+        initialValue: widget.initialValue,
+        validator: widget.validator,
+        onChanged: widget.onChanged,
         cursorColor: kColorWhite,
         style: TextStyle(color: kColorWhite),
         decoration: InputDecoration(
-          icon: Icon(
-            icon,
-            color: kColorWhite,
-          ),
-          hintText: hintText,
+          // icon: Icon(
+          //   icon,
+          //   color: kColorWhite,
+          // ),
+          suffixIcon: widget.isPassword
+              ? IconButton(
+                  icon: Icon(CustomIcons.showPassword, color: kColorText),
+                  onPressed: () {
+                    setState(() {
+                      hidePass = !hidePass;
+                    });
+                  })
+              : null,
+          hintText: widget.hintText,
           hintStyle: TextStyle(color: kColorWhite),
-          border: InputBorder.none,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderSide: BorderSide(width: 2, color: kColorText),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderSide: BorderSide(width: 2, color: kColorRed),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderSide: BorderSide(width: 2, color: kColorRed),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderSide: BorderSide(width: 2, color: kColorRed),
+          ),
         ),
       ),
     );

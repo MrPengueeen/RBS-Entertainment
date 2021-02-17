@@ -12,6 +12,10 @@
 ///       - asset: fonts/CustomIcons.ttf
 ///
 ///
+/// * Material Design Icons, Copyright (C) Google, Inc
+///         Author:    Google
+///         License:   Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+///         Homepage:  https://design.google.com/icons/
 ///
 import 'package:flutter/widgets.dart';
 
@@ -31,8 +35,12 @@ class CustomIcons {
       IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData play =
       IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData ic24download =
+  static const IconData ic24_download =
       IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData share =
       IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData showPassword =
+      IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData chevron_left =
+      IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

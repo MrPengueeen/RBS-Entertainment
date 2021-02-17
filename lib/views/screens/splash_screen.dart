@@ -30,8 +30,13 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: kPrimaryColor,
       body: VStack([
-        Text(APP_NAME).text.xl5.bold.white.make().pOnly(bottom: 20),
-        LoadingWidget(),
+        // Text(APP_NAME).text.xl5.bold.white.make().pOnly(bottom: 20),
+        Image.asset(
+          'assets/logos/logo_big.png',
+          height: 100,
+          width: 100,
+        ),
+        //LoadingWidget(),
       ], crossAlignment: CrossAxisAlignment.center)
           .centered(),
     );

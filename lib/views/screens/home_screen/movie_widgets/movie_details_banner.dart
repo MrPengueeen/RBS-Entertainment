@@ -29,7 +29,9 @@ class _MovieBannerWidgetState extends State<MovieBannerWidget> {
                 image: DecorationImage(
                   fit: BoxFit.fill,
                   image: NetworkImage(
-                    'https://posteritati.com/posters/000/000/051/575/beauty-and-the-beast-sm-web.jpg',
+                    widget.movie.poster != null
+                        ? widget.movie.poster
+                        : 'https://posteritati.com/posters/000/000/051/575/beauty-and-the-beast-sm-web.jpg',
                   ),
                 ),
               )),

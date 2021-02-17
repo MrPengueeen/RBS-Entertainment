@@ -69,13 +69,13 @@ postRequest(
 
     var accessToken = await getString(ACCESS);
 
-    var headers = {
-      HttpHeaders.acceptHeader: 'application/json; charset=utf-8',
-    };
+    var headers;
 
     if (bearerToken) {
-      var header = {"Authorization": "Token $accessToken"};
-      headers.addAll(header);
+      headers = {
+        HttpHeaders.acceptHeader: 'application/json; charset=utf-8',
+        "Authorization": "Token $accessToken"
+      };
     }
 
     print("Headers: $headers");

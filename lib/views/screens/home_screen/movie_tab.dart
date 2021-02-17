@@ -99,8 +99,9 @@ class _MovieTabState extends State<MovieTab>
                       movie: latestMovies[index],
                       rating: latestMovies[index].rating.toString(),
                       genre: latestMovies[index].genre,
-                      image:
-                          'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
+                      image: latestMovies[index].poster != null
+                          ? latestMovies[index].poster
+                          : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
                       name: latestMovies[index].title,
                       reviews: 36,
                     ),
@@ -157,8 +158,9 @@ class _MovieTabState extends State<MovieTab>
                   HStack(popularMovies
                           .map((e) => MovieTileSmallWidget(
                                 movie: e,
-                                image:
-                                    'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
+                                image: e.poster != null
+                                    ? e.poster
+                                    : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
                                 name: e.title,
                               ))
                           .toList())
