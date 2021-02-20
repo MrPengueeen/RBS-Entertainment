@@ -53,3 +53,8 @@ Future getTransactionStatus(Map request) async {
       'transection/return_url_response', request,
       bearerToken: true));
 }
+
+Future getMoviesBySearch(String searchTerm) async {
+  return handleResponse(await getRequest('content/movie/?search=$searchTerm',
+      bearerToken: false));
+}

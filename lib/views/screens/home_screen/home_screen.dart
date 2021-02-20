@@ -1,9 +1,11 @@
 import 'package:RBS/colors.dart';
 import 'package:RBS/models/menu_model.dart';
 import 'package:RBS/views/screens/home_screen/movie_tab.dart';
+import 'package:RBS/views/screens/home_screen/movie_widgets/notification_widget.dart';
 import 'package:RBS/views/shared_widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class HomeScreen extends StatefulWidget {
   final List<MenuModel> menuItems;
@@ -11,15 +13,17 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key, this.menuItems}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
+  bool isNotificationOpen = false;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: widget.menuItems.length,
-        child: Scaffold(
+      length: widget.menuItems.length,
+      child: Stack(children: [
+        Scaffold(
           backgroundColor: kPrimaryColor,
           appBar: CustomAppBar(
             menuItems: widget.menuItems,
@@ -44,6 +48,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ))
                     .toList()),
           ),
-        ));
+        ),
+        Positioned(right: 28, top: 80, child: NotificationWidget())
+            .visible(isNotificationOpen),
+      ]),
+    );
   }
 }

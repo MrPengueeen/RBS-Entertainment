@@ -5,6 +5,7 @@ import 'package:RBS/views/screens/auth_screens/menu_screen/menu_screen.dart';
 import 'package:RBS/views/screens/downloads_screen/download_screen.dart';
 import 'package:RBS/views/screens/home_screen/home_screen.dart';
 import 'package:RBS/views/screens/home_screen/movie_details_screen.dart';
+import 'package:RBS/views/screens/home_screen/movie_widgets/notification_widget.dart';
 import 'package:RBS/views/screens/search_screen/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   Future<void> getMenuItems() async {
     await getMenuApi().then((response) {
       menuItems = (response as List).map((e) => MenuModel.fromJson(e)).toList();
+
       setState(() {
         isLoading = false;
       });

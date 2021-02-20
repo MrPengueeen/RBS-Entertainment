@@ -1,5 +1,6 @@
 import 'package:RBS/colors.dart';
 import 'package:RBS/models/menu_model.dart';
+import 'package:RBS/views/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -17,6 +18,7 @@ class CustomAppBar extends StatefulWidget with PreferredSizeWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
+  bool notificationOpen = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -27,29 +29,53 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Container(
-      height: 60,
-      color: kPrimaryColor,
-      child: HStack(
-        [
-          Image.asset(
-            'assets/logos/rbs_logo.png',
-          ).pLTRB(20, 16, 16, 16),
-          Flexible(
-            child: TabBar(
-                isScrollable: true,
-                labelColor: Colors.white,
-                tabs: widget.menuItems
-                    .map((e) => Tab(
-                          text: e.title,
-                        ))
-                    .toList()),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            left: 0,
+            right: 0,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: 60,
+              color: kPrimaryColor,
+              child: HStack(
+                [
+                  Image.asset('assets/logos/rbs_logo.png',
+                          width: 31.2, height: 26)
+                      .pOnly(left: 20),
+                  Flexible(
+                    child: TabBar(
+                        isScrollable: true,
+                        labelColor: Colors.white,
+                        tabs: widget.menuItems
+                            .map((e) => Tab(
+                                  text: e.title,
+                                ))
+                            .toList()),
+                  ),
+                  Image.asset('assets/icons/bell.png', height: 20, width: 16)
+                      .pOnly(right: 20)
+                      .onInkTap(() {
+                    context
+                        .findAncestorStateOfType<HomeScreenState>()
+                        .setState(() {
+                      context
+                              .findAncestorStateOfType<HomeScreenState>()
+                              .isNotificationOpen =
+                          !context
+                              .findAncestorStateOfType<HomeScreenState>()
+                              .isNotificationOpen;
+                    });
+                  }),
+                ],
+                alignment: MainAxisAlignment.spaceBetween,
+                axisSize: MainAxisSize.min,
+              ),
+            ),
           ),
-          Image.asset('assets/icons/bell.png').pLTRB(16, 16, 20, 16),
         ],
-        alignment: MainAxisAlignment.spaceBetween,
-        axisSize: MainAxisSize.min,
       ),
-    ));
+    );
   }
 }

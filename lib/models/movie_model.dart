@@ -33,7 +33,7 @@ class MovieModel {
         id: json['id'],
         title: json['title'],
         duration: json['duration'],
-        menuId: json['menu']['id'],
+        menuId: json['menu'] != null ? json['menu']['id'] : null,
         genre: genreList,
         year: json['publishing_year'],
         rating: json['rating'],
