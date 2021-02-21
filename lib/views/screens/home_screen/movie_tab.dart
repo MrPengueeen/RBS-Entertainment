@@ -80,7 +80,7 @@ class _MovieTabState extends State<MovieTab>
         if (scrollNotification is ScrollEndNotification &&
             scrollNotification.metrics.pixels ==
                 scrollNotification.metrics.maxScrollExtent) {
-          print('Scroll End notification listener');
+          //print('Scroll End notification listener');
           setState(() {
             _newLoading = _next != null ? true : false;
           });
@@ -200,7 +200,7 @@ class _MovieTabState extends State<MovieTab>
                     CircularProgressIndicator(backgroundColor: kColorWhite)
                         .visible(_newLoading)
                         .centered()
-                        .pSymmetric(h: 20)
+                        .pSymmetric(v: 20)
                   ],
                 ),
               ),
