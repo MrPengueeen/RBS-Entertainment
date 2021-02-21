@@ -29,9 +29,28 @@ Future getMenuApi() async {
   return handleResponse(await getRequest('content/menu/', bearerToken: false));
 }
 
-Future getMoviesByMenu(int menuId) async {
-  return handleResponse(
-      await getRequest('content/movie/?menu=$menuId', bearerToken: false));
+Future getMoviesByMenu(int menuId, int page, int numberPerPage) async {
+  return handleResponse(await getRequest(
+      'content/movie/?page=$page&page_size=$numberPerPage&menu=$menuId',
+      bearerToken: false));
+}
+
+Future getLatestMoviesByMenu(int menuId) async {
+  return handleResponse(await getRequest(
+      'content/movie/?page=1&page_size=10&menu=$menuId&ordering=-released',
+      bearerToken: false));
+}
+
+Future getLatestMoviesForAll() async {
+  return handleResponse(await getRequest(
+      'content/movie/?page=1&page_size=10&ordering=-released',
+      bearerToken: false));
+}
+
+Future getPopularMoviesForAll() async {
+  return handleResponse(await getRequest(
+      'content/movie/?page=1&page_size=10&ordering=-rating',
+      bearerToken: false));
 }
 
 /// Subscription

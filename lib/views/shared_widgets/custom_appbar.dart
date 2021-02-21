@@ -48,11 +48,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     child: TabBar(
                         isScrollable: true,
                         labelColor: Colors.white,
-                        tabs: widget.menuItems
-                            .map((e) => Tab(
-                                  text: e.title,
-                                ))
-                            .toList()),
+                        tabs: [
+                          Tab(text: 'All'),
+                          ...widget.menuItems
+                              .map((e) => Tab(
+                                    text: e.title,
+                                  ))
+                              .toList()
+                        ]),
                   ),
                   Image.asset('assets/icons/bell.png', height: 20, width: 16)
                       .pOnly(right: 20)

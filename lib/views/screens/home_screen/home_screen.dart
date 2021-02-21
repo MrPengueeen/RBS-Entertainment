@@ -1,5 +1,6 @@
 import 'package:RBS/colors.dart';
 import 'package:RBS/models/menu_model.dart';
+import 'package:RBS/views/screens/home_screen/home_tab.dart';
 import 'package:RBS/views/screens/home_screen/movie_tab.dart';
 import 'package:RBS/views/screens/home_screen/movie_widgets/notification_widget.dart';
 import 'package:RBS/views/shared_widgets/shared_widgets.dart';
@@ -21,32 +22,22 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: widget.menuItems.length,
+      length: widget.menuItems.length + 1,
       child: Stack(children: [
         Scaffold(
           backgroundColor: kPrimaryColor,
           appBar: CustomAppBar(
             menuItems: widget.menuItems,
           ),
-          // appBar: AppBar(
-          //   leading: Image.asset(
-          //     'assets/logos/rbs_logo.png',
-          //   ).p16(),
-          //   actions: [
-          //     TabBar(tabs: [
-          //       Tab(icon: Icon(Icons.directions_car)),
-          //       Tab(icon: Icon(Icons.directions_transit)),
-          //       Tab(icon: Icon(Icons.directions_bike)),
-          //     ]),
-          //   ],
-          // ),
           body: SafeArea(
-            child: TabBarView(
-                children: widget.menuItems
-                    .map((e) => MovieTab(
-                          menu: e,
-                        ))
-                    .toList()),
+            child: TabBarView(children: [
+              HomeTab(),
+              ...widget.menuItems
+                  .map((e) => MovieTab(
+                        menu: e,
+                      ))
+                  .toList()
+            ]),
           ),
         ),
         Positioned(right: 28, top: 80, child: NotificationWidget())
