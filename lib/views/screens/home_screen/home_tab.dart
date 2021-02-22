@@ -6,6 +6,7 @@ import 'package:RBS/views/screens/home_screen/movie_widgets/movie_tile_small.dar
 import 'package:RBS/views/shared_widgets/shared_widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeTab extends StatefulWidget {
@@ -69,20 +70,14 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
                 children: [
                   HStack(
                     [
-                      Text('Latest Movies')
-                          .text
-                          .white
-                          .xl2
-                          .bold
-                          .make()
-                          .pOnly(bottom: 20),
-                      Text('See More')
-                          .text
-                          .white
-                          .xl2
-                          .bold
-                          .make()
-                          .pOnly(bottom: 20),
+                      Text('Latest Movies',
+                          style: TextStyle(
+                            fontSize: 17,
+                          )).text.white.bold.make().pOnly(bottom: 20),
+                      Text('See All',
+                          style: TextStyle(
+                            fontSize: 13,
+                          )).text.white.bold.make().pOnly(bottom: 20),
                     ],
                     alignment: MainAxisAlignment.spaceBetween,
                   ),
@@ -102,10 +97,10 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
                       scrollDirection: Axis.horizontal,
                       initialPage: 0,
                       enableInfiniteScroll: false,
-                      viewportFraction: 0.7,
-                      height: 560,
+                      viewportFraction: 0.65,
+                      height: 470,
                       enlargeCenterPage: true,
-                      enlargeStrategy: CenterPageEnlargeStrategy.height,
+                      enlargeStrategy: CenterPageEnlargeStrategy.scale,
                     ),
                   ),
                   // CarouselSlider(
@@ -131,33 +126,28 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
                   //     .toList()),
                   HStack(
                     [
-                      Text('Popular Movies')
-                          .text
-                          .white
-                          .xl2
-                          .bold
-                          .make()
-                          .pOnly(bottom: 20),
-                      Text('See More')
-                          .text
-                          .white
-                          .xl2
-                          .bold
-                          .make()
-                          .pOnly(bottom: 20),
+                      Text('Popular Movies',
+                          style: TextStyle(
+                            fontSize: 17,
+                          )).text.white.bold.make().pOnly(bottom: 20),
+                      Text('See All',
+                          style: TextStyle(
+                            fontSize: 13,
+                          )).text.white.bold.make().pOnly(bottom: 20),
                     ],
                     alignment: MainAxisAlignment.spaceBetween,
                   ),
-                  HStack(popularMovies
-                          .map((e) => MovieTileSmallWidget(
-                                movie: e,
-                                image: e.poster != null
-                                    ? e.poster
-                                    : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
-                                name: e.title,
-                              ))
-                          .toList())
-                      .scrollHorizontal()
+                  HStack(
+                    popularMovies
+                        .map((e) => MovieTileSmallWidget(
+                              movie: e,
+                              image: e.poster != null
+                                  ? e.poster
+                                  : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
+                              name: e.title,
+                            ))
+                        .toList(),
+                  ).scrollHorizontal()
                 ],
               ),
             ),

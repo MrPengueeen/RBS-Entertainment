@@ -5,16 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class MovieTileSmallWidget extends StatelessWidget {
+class MovieTileWidget extends StatelessWidget {
   final String name;
   final String image;
   final MovieModel movie;
 
-  const MovieTileSmallWidget({Key key, this.name, this.image, this.movie})
+  const MovieTileWidget({Key key, this.name, this.image, this.movie})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
         pushNewScreen(
@@ -29,8 +30,8 @@ class MovieTileSmallWidget extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
-              height: 80.0,
-              width: 140.0,
+              height: size.width * 0.4,
+              width: size.width * 0.4,
               decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.fill,
@@ -38,7 +39,7 @@ class MovieTileSmallWidget extends StatelessWidget {
                       image,
                     ),
                   ),
-                  borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(10)),
             ).pOnly(bottom: 10),
             SizedBox(
                 width: 150,

@@ -35,58 +35,66 @@ class MovieTileBigWidget extends StatelessWidget {
         );
       },
       child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 12),
           child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 330.0,
-                width: 245.0,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: NetworkImage(
-                        image,
-                      ),
-                    ),
-                    borderRadius: BorderRadius.circular(30)),
+              Stack(
+                children: [
+                  Container(
+                    height: 265.0,
+                    width: 247.0,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(
+                            image,
+                          ),
+                        ),
+                        borderRadius: BorderRadius.circular(30)),
+                  ),
+                  Positioned(
+                    right: 20,
+                    top: 20,
+                    child: VxCircle(
+                        radius: 50,
+                        backgroundColor: kColorRed,
+                        child: Icon(
+                          Icons.favorite_border_outlined,
+                          color: kColorWhite,
+                        )),
+                  )
+                ],
+              ).pOnly(bottom: 17),
+              SizedBox(
+                  width: 220,
+                  child: Text(name, style: TextStyle(fontSize: 17))
+                      .text
+                      .bold
+                      .white
+                      .make()
+                      .pOnly(bottom: 10)),
+              SizedBox(
+                width: 220,
+                child: Text(
+                  genre.join(', '),
+                  style: TextStyle(
+                      color: kColorWhite.withOpacity(0.7), fontSize: 12),
+                ).pOnly(bottom: 10),
               ),
-              Positioned(
-                right: 20,
-                top: 20,
-                child: VxCircle(
-                    radius: 50,
-                    backgroundColor: kColorRed,
-                    child: Icon(
-                      Icons.favorite_border_outlined,
-                      color: kColorWhite,
-                    )),
-              )
+              HStack([
+                Icon(
+                  Icons.star,
+                  color: kColorRed,
+                ),
+                Text(
+                  ' ${rating} (${reviews} Reviews)',
+                  style: TextStyle(
+                      color: kColorWhite.withOpacity(0.7), fontSize: 12),
+                )
+              ])
             ],
-          ),
-          SizedBox(
-              width: 220,
-              child: Text(name).text.xl.bold.white.make().pOnly(bottom: 10)),
-          SizedBox(
-            width: 220,
-            child: Text(
-              genre.join(', '),
-              style: TextStyle(color: kColorWhite.withOpacity(0.7)),
-            ).pOnly(bottom: 10),
-          ),
-          HStack([
-            Icon(
-              Icons.star,
-              color: kColorRed,
-            ),
-            Text(
-              '${rating} (${reviews} Reviews)',
-              style: TextStyle(color: kColorWhite.withOpacity(0.7)),
-            )
-          ])
-        ],
-      )),
+          )),
     );
   }
 }

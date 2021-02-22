@@ -2,6 +2,7 @@ import 'package:RBS/colors.dart';
 import 'package:RBS/models/menu_model.dart';
 import 'package:RBS/models/movie_model.dart';
 import 'package:RBS/services/network/rest_apis.dart';
+import 'package:RBS/views/screens/home_screen/movie_widgets/movie_tile.dart';
 import 'package:RBS/views/screens/home_screen/movie_widgets/movie_tile_small.dart';
 import 'package:RBS/views/shared_widgets/shared_widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -75,6 +76,7 @@ class _MovieTabState extends State<MovieTab>
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return NotificationListener(
       onNotification: (scrollNotification) {
         if (scrollNotification is ScrollEndNotification &&
@@ -120,20 +122,14 @@ class _MovieTabState extends State<MovieTab>
                   children: [
                     HStack(
                       [
-                        Text('Latest ${widget.menu.title}')
-                            .text
-                            .white
-                            .xl2
-                            .bold
-                            .make()
-                            .pOnly(bottom: 20),
-                        Text('See More')
-                            .text
-                            .white
-                            .xl2
-                            .bold
-                            .make()
-                            .pOnly(bottom: 20),
+                        Text('Latest ${widget.menu.title}',
+                            style: TextStyle(
+                              fontSize: 17,
+                            )).text.white.bold.make().pOnly(bottom: 20),
+                        Text('See All',
+                            style: TextStyle(
+                              fontSize: 13,
+                            )).text.white.bold.make().pOnly(bottom: 20),
                       ],
                       alignment: MainAxisAlignment.spaceBetween,
                     ),
@@ -153,50 +149,48 @@ class _MovieTabState extends State<MovieTab>
                         scrollDirection: Axis.horizontal,
                         initialPage: 0,
                         enableInfiniteScroll: false,
-                        viewportFraction: 0.7,
-                        height: 560,
+                        viewportFraction: 0.65,
+                        height: 470,
                         enlargeCenterPage: true,
-                        enlargeStrategy: CenterPageEnlargeStrategy.height,
+                        enlargeStrategy: CenterPageEnlargeStrategy.scale,
                       ),
                     ),
                     HStack(
                       [
-                        Text('All ${widget.menu.title}')
-                            .text
-                            .white
-                            .xl2
-                            .bold
-                            .make()
-                            .pOnly(bottom: 20),
-                        Text('See More')
-                            .text
-                            .white
-                            .xl2
-                            .bold
-                            .make()
-                            .pOnly(bottom: 20),
+                        Text('All ${widget.menu.title}',
+                            style: TextStyle(
+                              fontSize: 17,
+                            )).text.white.bold.make().pOnly(bottom: 20),
+                        // Text('See All',
+                        //     style: TextStyle(
+                        //       fontSize: 13,
+                        //     )).text.white.bold.make().pOnly(bottom: 20),
                       ],
                       alignment: MainAxisAlignment.spaceBetween,
                     ),
-                    GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: 2.5 / 3,
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 3.0,
-                            mainAxisSpacing: 0),
-                        itemCount: movies.length,
-                        //controller: _sccontroller,
-                        itemBuilder: (_, index) {
-                          return MovieTileSmallWidget(
-                            movie: movies[index],
-                            image: movies[index].poster != null
-                                ? movies[index].poster
-                                : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
-                            name: movies[index].title,
-                          );
-                        }),
+                    Center(
+                      child: GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: (size.width * 0.4) /
+                                      ((size.width * 0.4) + 50),
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 0,
+                                  mainAxisSpacing: 0),
+                          itemCount: movies.length,
+                          //controller: _sccontroller,
+                          itemBuilder: (_, index) {
+                            return MovieTileWidget(
+                              movie: movies[index],
+                              image: movies[index].poster != null
+                                  ? movies[index].poster
+                                  : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
+                              name: movies[index].title,
+                            );
+                          }),
+                    ),
                     CircularProgressIndicator(backgroundColor: kColorWhite)
                         .visible(_newLoading)
                         .centered()

@@ -43,9 +43,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
               color: kPrimaryColor,
               child: HStack(
                 [
-                  Image.asset('assets/logos/rbs_logo.png',
-                          width: 31.2, height: 26)
-                      .pOnly(left: 20),
+                  InkWell(
+                    onTap: () {
+                      DefaultTabController.of(context).animateTo(0);
+                    },
+                    child: Image.asset('assets/logos/rbs_logo.png',
+                            width: 31.2, height: 26)
+                        .pOnly(left: 20),
+                  ),
                   Flexible(
                     child: TabBar(
                         isScrollable: true,

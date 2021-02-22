@@ -44,62 +44,80 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 backgroundColor: kPrimaryColor,
               )
             : SingleChildScrollView(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: packages.length,
-                    itemBuilder: (_, index) {
-                      return InkWell(
-                        child: SubscriptionWidget(
-                          plan: packages[index],
-                        ),
-                        onTap: () async {
-                          bool isLoggedIn =
-                              await getBool(LOGGED_IN, defaultValue: false);
-                          if (isLoggedIn) {
-                            setState(() {
-                              isLoading = true;
-                              getTransactionData(
-                                      packages[index].id,
-                                      double.parse(packages[index].price)
-                                          .toInt()
-                                          .toString())
-                                  .then((response) async {
-                                String txID = response['txID'];
-                                String form = response['form'];
-                                await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => PaymentWebView(
-                                              form: form,
-                                            )));
-                                VxToast.show(context,
-                                    msg: 'Checking transaction status',
-                                    showTime: 3000);
-                                Map<dynamic, dynamic> request = {'txID': txID};
-                                getTransactionStatus(request).then((response) {
-                                  VxToast.show(context,
-                                      msg:
-                                          'Your payment for the subscription plan ${packages[index].name} is ${response['status']}',
-                                      showTime: 4000);
-                                });
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: Text(
+                        'Subscription Packages',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: kColorWhite,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ).pOnly(bottom: 20),
+                    ),
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: packages.length,
+                        itemBuilder: (_, index) {
+                          return InkWell(
+                            child: SubscriptionWidget(
+                              plan: packages[index],
+                            ),
+                            onTap: () async {
+                              bool isLoggedIn =
+                                  await getBool(LOGGED_IN, defaultValue: false);
+                              if (isLoggedIn) {
                                 setState(() {
-                                  isLoading = false;
+                                  isLoading = true;
+                                  getTransactionData(
+                                          packages[index].id,
+                                          double.parse(packages[index].price)
+                                              .toInt()
+                                              .toString())
+                                      .then((response) async {
+                                    String txID = response['txID'];
+                                    String form = response['form'];
+                                    await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => PaymentWebView(
+                                                  form: form,
+                                                )));
+                                    VxToast.show(context,
+                                        msg: 'Checking transaction status',
+                                        showTime: 3000);
+                                    Map<dynamic, dynamic> request = {
+                                      'txID': txID
+                                    };
+                                    getTransactionStatus(request)
+                                        .then((response) {
+                                      VxToast.show(context,
+                                          msg:
+                                              'Your payment for the subscription plan ${packages[index].name} is ${response['status']}',
+                                          showTime: 4000);
+                                    });
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                  }).catchError((error) {
+                                    VxToast.show(context,
+                                        msg: 'Something went wrong!');
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                  });
                                 });
-                              }).catchError((error) {
-                                VxToast.show(context,
-                                    msg: 'Something went wrong!');
-                                setState(() {
-                                  isLoading = false;
-                                });
-                              });
-                            });
-                          } else {
-                            pushNewScreen(context,
-                                screen: WelcomeScreen(), withNavBar: false);
-                          }
-                        },
-                      );
-                    }),
+                              } else {
+                                pushNewScreen(context,
+                                    screen: WelcomeScreen(), withNavBar: false);
+                              }
+                            },
+                          );
+                        }),
+                  ],
+                ),
               ),
       ),
     );

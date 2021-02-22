@@ -42,7 +42,7 @@ class _MenuScreenState extends State<MenuScreen> {
             text: 'Subscription',
             press: () {
               pushNewScreen(context,
-                  screen: SubscriptionScreen(), withNavBar: false);
+                  screen: SubscriptionScreen(), withNavBar: true);
             },
           ),
           CustomButtonWidget(
