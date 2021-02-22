@@ -1,7 +1,9 @@
 import 'package:RBS/colors.dart';
 import 'package:RBS/models/menu_model.dart';
 import 'package:RBS/views/screens/home_screen/home_screen.dart';
+import 'package:RBS/views/screens/notification_screen/notification_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CustomAppBar extends StatefulWidget with PreferredSizeWidget {
@@ -60,16 +62,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   Image.asset('assets/icons/bell.png', height: 20, width: 16)
                       .pOnly(right: 20)
                       .onInkTap(() {
-                    context
-                        .findAncestorStateOfType<HomeScreenState>()
-                        .setState(() {
-                      context
-                              .findAncestorStateOfType<HomeScreenState>()
-                              .isNotificationOpen =
-                          !context
-                              .findAncestorStateOfType<HomeScreenState>()
-                              .isNotificationOpen;
-                    });
+                    pushNewScreen(
+                      context,
+                      screen: NotificationScreen(),
+                      withNavBar: true, // OPTIONAL VALUE. True by default.
+                      pageTransitionAnimation:
+                          PageTransitionAnimation.cupertino,
+                    );
                   }),
                 ],
                 alignment: MainAxisAlignment.spaceBetween,

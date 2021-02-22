@@ -23,26 +23,22 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: widget.menuItems.length + 1,
-      child: Stack(children: [
-        Scaffold(
-          backgroundColor: kPrimaryColor,
-          appBar: CustomAppBar(
-            menuItems: widget.menuItems,
-          ),
-          body: SafeArea(
-            child: TabBarView(children: [
-              HomeTab(),
-              ...widget.menuItems
-                  .map((e) => MovieTab(
-                        menu: e,
-                      ))
-                  .toList()
-            ]),
-          ),
+      child: Scaffold(
+        backgroundColor: kPrimaryColor,
+        appBar: CustomAppBar(
+          menuItems: widget.menuItems,
         ),
-        Positioned(right: 28, top: 80, child: NotificationWidget())
-            .visible(isNotificationOpen),
-      ]),
+        body: SafeArea(
+          child: TabBarView(children: [
+            HomeTab(),
+            ...widget.menuItems
+                .map((e) => MovieTab(
+                      menu: e,
+                    ))
+                .toList()
+          ]),
+        ),
+      ),
     );
   }
 }
