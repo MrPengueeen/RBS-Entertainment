@@ -70,7 +70,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   })
               : null,
           hintText: widget.hintText,
-          hintStyle: TextStyle(color: kColorWhite),
+          hintStyle: TextStyle(color: kColorText.withOpacity(0.5)),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(8)),
             borderSide: BorderSide(width: 2, color: kColorText),

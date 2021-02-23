@@ -51,7 +51,7 @@ class MovieTileBigWidget extends StatelessWidget {
                             image,
                           ),
                         ),
-                        borderRadius: BorderRadius.circular(30)),
+                        borderRadius: BorderRadius.circular(20)),
                   ),
                   Positioned(
                     right: 20,

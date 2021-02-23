@@ -57,14 +57,14 @@ class _SignInScreenState extends State<SignInScreen> {
                               width: 54,
                               alignment: Alignment.centerLeft,
                             ).pOnly(bottom: 15),
-                            Text('Welcome back,').text.white.bold.xl3.make(),
+                            Text('Welcome back').text.white.bold.xl3.make(),
                             Text(
                               'Sign in to your account',
                               style: TextStyle(color: kColorText),
                             ).text.make().pOnly(bottom: 30),
                             Text('Email').text.xl.white.make(),
                             CustomTextField(
-                              hintText: "Email / Phone Number",
+                              hintText: "Email / Phone",
                               icon: Icons.alternate_email,
                               onChanged: (value) {
                                 _email = value;

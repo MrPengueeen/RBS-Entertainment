@@ -56,101 +56,106 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                backgroundColor: kPrimaryColor,
-              ),
-            )
-          : Container(
-              padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  HStack(
-                    [
-                      Text('Latest Movies',
-                          style: TextStyle(
-                            fontSize: 17,
-                          )).text.white.bold.make().pOnly(bottom: 20),
-                      Text('See All',
-                          style: TextStyle(
-                            fontSize: 13,
-                          )).text.white.bold.make().pOnly(bottom: 20),
-                    ],
-                    alignment: MainAxisAlignment.spaceBetween,
-                  ),
-                  CarouselSlider.builder(
-                    itemCount: latestMovies.length,
-                    itemBuilder: (_, index, initial) => MovieTileBigWidget(
-                      movie: latestMovies[index],
-                      rating: latestMovies[index].rating.toString(),
-                      genre: latestMovies[index].genre,
-                      image: latestMovies[index].poster != null
-                          ? latestMovies[index].poster
-                          : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
-                      name: latestMovies[index].title,
-                      reviews: 36,
+    return RefreshIndicator(
+      color: kPrimaryColor,
+      onRefresh: () => getMovies(),
+      child: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        child: isLoading
+            ? Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: kPrimaryColor,
+                ),
+              )
+            : Container(
+                padding: EdgeInsets.only(top: 10, left: 20, right: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    HStack(
+                      [
+                        Text('Latest Movies',
+                            style: TextStyle(
+                              fontSize: 17,
+                            )).text.white.bold.make().pOnly(bottom: 20),
+                        Text('See All',
+                            style: TextStyle(
+                              fontSize: 13,
+                            )).text.white.bold.make().pOnly(bottom: 20),
+                      ],
+                      alignment: MainAxisAlignment.spaceBetween,
                     ),
-                    options: CarouselOptions(
-                      scrollDirection: Axis.horizontal,
-                      initialPage: 0,
-                      enableInfiniteScroll: false,
-                      viewportFraction: 0.65,
-                      height: 470,
-                      enlargeCenterPage: true,
-                      enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                    CarouselSlider.builder(
+                      itemCount: latestMovies.length,
+                      itemBuilder: (_, index, initial) => MovieTileBigWidget(
+                        movie: latestMovies[index],
+                        rating: latestMovies[index].rating.toString(),
+                        genre: latestMovies[index].genre,
+                        image: latestMovies[index].poster != null
+                            ? latestMovies[index].poster
+                            : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
+                        name: latestMovies[index].title,
+                        reviews: 36,
+                      ),
+                      options: CarouselOptions(
+                        scrollDirection: Axis.horizontal,
+                        initialPage: 0,
+                        enableInfiniteScroll: false,
+                        viewportFraction: 0.65,
+                        height: 470,
+                        enlargeCenterPage: true,
+                        enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                      ),
                     ),
-                  ),
-                  // CarouselSlider(
-                  //     options: CarouselOptions(
-                  //       scrollDirection: Axis.horizontal,
-                  //       initialPage: 0,
-                  //       enableInfiniteScroll: false,
-                  //       viewportFraction: 0.7,
-                  //       height: 560,
-                  //       enlargeCenterPage: true,
-                  //       enlargeStrategy: CenterPageEnlargeStrategy.height,
-                  //     ),
-                  // items: latestMovies
-                  //     .map((e) => MovieTileBigWidget(
-                  //           movie: e,
-                  //           rating: e.rating.toString(),
-                  //           genre: e.genre,
-                  //           image:
-                  //               'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
-                  //           name: e.title,
-                  //           reviews: 36,
-                  //         ))
-                  //     .toList()),
-                  HStack(
-                    [
-                      Text('Popular Movies',
-                          style: TextStyle(
-                            fontSize: 17,
-                          )).text.white.bold.make().pOnly(bottom: 20),
-                      Text('See All',
-                          style: TextStyle(
-                            fontSize: 13,
-                          )).text.white.bold.make().pOnly(bottom: 20),
-                    ],
-                    alignment: MainAxisAlignment.spaceBetween,
-                  ),
-                  HStack(
-                    popularMovies
-                        .map((e) => MovieTileSmallWidget(
-                              movie: e,
-                              image: e.poster != null
-                                  ? e.poster
-                                  : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
-                              name: e.title,
-                            ))
-                        .toList(),
-                  ).scrollHorizontal()
-                ],
+                    // CarouselSlider(
+                    //     options: CarouselOptions(
+                    //       scrollDirection: Axis.horizontal,
+                    //       initialPage: 0,
+                    //       enableInfiniteScroll: false,
+                    //       viewportFraction: 0.7,
+                    //       height: 560,
+                    //       enlargeCenterPage: true,
+                    //       enlargeStrategy: CenterPageEnlargeStrategy.height,
+                    //     ),
+                    // items: latestMovies
+                    //     .map((e) => MovieTileBigWidget(
+                    //           movie: e,
+                    //           rating: e.rating.toString(),
+                    //           genre: e.genre,
+                    //           image:
+                    //               'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
+                    //           name: e.title,
+                    //           reviews: 36,
+                    //         ))
+                    //     .toList()),
+                    HStack(
+                      [
+                        Text('Popular Movies',
+                            style: TextStyle(
+                              fontSize: 17,
+                            )).text.white.bold.make().pOnly(bottom: 20),
+                        Text('See All',
+                            style: TextStyle(
+                              fontSize: 13,
+                            )).text.white.bold.make().pOnly(bottom: 20),
+                      ],
+                      alignment: MainAxisAlignment.spaceBetween,
+                    ),
+                    HStack(
+                      popularMovies
+                          .map((e) => MovieTileSmallWidget(
+                                movie: e,
+                                image: e.poster != null
+                                    ? e.poster
+                                    : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
+                                name: e.title,
+                              ))
+                          .toList(),
+                    ).scrollHorizontal()
+                  ],
+                ),
               ),
-            ),
+      ),
     );
   }
 }

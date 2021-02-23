@@ -55,6 +55,8 @@ class _MovieTabState extends State<MovieTab>
           .map((e) => MovieModel.fromJson(e))
           .toList();
 
+      _page = 1;
+
       getMoviesByMenu(widget.menu.id, _page, _perPage).then((response) {
         movies = (response['results'] as List)
             .map((e) => MovieModel.fromJson(e))
@@ -108,96 +110,101 @@ class _MovieTabState extends State<MovieTab>
         }
         return false;
       },
-      child: SingleChildScrollView(
-        child: isLoading
-            ? Center(
-                child: CircularProgressIndicator(
-                  backgroundColor: kPrimaryColor,
-                ),
-              )
-            : Container(
-                padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    HStack(
-                      [
-                        Text('Latest ${widget.menu.title}',
-                            style: TextStyle(
-                              fontSize: 17,
-                            )).text.white.bold.make().pOnly(bottom: 20),
-                        Text('See All',
-                            style: TextStyle(
-                              fontSize: 13,
-                            )).text.white.bold.make().pOnly(bottom: 20),
-                      ],
-                      alignment: MainAxisAlignment.spaceBetween,
-                    ),
-                    CarouselSlider.builder(
-                      itemCount: latestMovies.length,
-                      itemBuilder: (_, index, initial) => MovieTileBigWidget(
-                        movie: latestMovies[index],
-                        rating: latestMovies[index].rating.toString(),
-                        genre: latestMovies[index].genre,
-                        image: latestMovies[index].poster != null
-                            ? latestMovies[index].poster
-                            : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
-                        name: latestMovies[index].title,
-                        reviews: 36,
+      child: RefreshIndicator(
+        color: kPrimaryColor,
+        onRefresh: () => getMovies(),
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: isLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: kPrimaryColor,
+                  ),
+                )
+              : Container(
+                  padding: EdgeInsets.only(top: 10, left: 20, right: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      HStack(
+                        [
+                          Text('Latest ${widget.menu.title}',
+                              style: TextStyle(
+                                fontSize: 17,
+                              )).text.white.bold.make().pOnly(bottom: 20),
+                          Text('See All',
+                              style: TextStyle(
+                                fontSize: 13,
+                              )).text.white.bold.make().pOnly(bottom: 20),
+                        ],
+                        alignment: MainAxisAlignment.spaceBetween,
                       ),
-                      options: CarouselOptions(
-                        scrollDirection: Axis.horizontal,
-                        initialPage: 0,
-                        enableInfiniteScroll: false,
-                        viewportFraction: 0.65,
-                        height: 470,
-                        enlargeCenterPage: true,
-                        enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                      CarouselSlider.builder(
+                        itemCount: latestMovies.length,
+                        itemBuilder: (_, index, initial) => MovieTileBigWidget(
+                          movie: latestMovies[index],
+                          rating: latestMovies[index].rating.toString(),
+                          genre: latestMovies[index].genre,
+                          image: latestMovies[index].poster != null
+                              ? latestMovies[index].poster
+                              : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
+                          name: latestMovies[index].title,
+                          reviews: 36,
+                        ),
+                        options: CarouselOptions(
+                          scrollDirection: Axis.horizontal,
+                          initialPage: 0,
+                          enableInfiniteScroll: false,
+                          viewportFraction: 0.65,
+                          height: 470,
+                          enlargeCenterPage: true,
+                          enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                        ),
                       ),
-                    ),
-                    HStack(
-                      [
-                        Text('All ${widget.menu.title}',
-                            style: TextStyle(
-                              fontSize: 17,
-                            )).text.white.bold.make().pOnly(bottom: 20),
-                        // Text('See All',
-                        //     style: TextStyle(
-                        //       fontSize: 13,
-                        //     )).text.white.bold.make().pOnly(bottom: 20),
-                      ],
-                      alignment: MainAxisAlignment.spaceBetween,
-                    ),
-                    Center(
-                      child: GridView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  childAspectRatio: (size.width * 0.4) /
-                                      ((size.width * 0.4) + 50),
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 0,
-                                  mainAxisSpacing: 0),
-                          itemCount: movies.length,
-                          //controller: _sccontroller,
-                          itemBuilder: (_, index) {
-                            return MovieTileWidget(
-                              movie: movies[index],
-                              image: movies[index].poster != null
-                                  ? movies[index].poster
-                                  : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
-                              name: movies[index].title,
-                            );
-                          }),
-                    ),
-                    CircularProgressIndicator(backgroundColor: kColorWhite)
-                        .visible(_newLoading)
-                        .centered()
-                        .pSymmetric(v: 20)
-                  ],
+                      HStack(
+                        [
+                          Text('All ${widget.menu.title}',
+                              style: TextStyle(
+                                fontSize: 17,
+                              )).text.white.bold.make().pOnly(bottom: 20),
+                          // Text('See All',
+                          //     style: TextStyle(
+                          //       fontSize: 13,
+                          //     )).text.white.bold.make().pOnly(bottom: 20),
+                        ],
+                        alignment: MainAxisAlignment.spaceBetween,
+                      ),
+                      Center(
+                        child: GridView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    childAspectRatio: (size.width * 0.4) /
+                                        ((size.width * 0.4) + 50),
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 0,
+                                    mainAxisSpacing: 0),
+                            itemCount: movies.length,
+                            //controller: _sccontroller,
+                            itemBuilder: (_, index) {
+                              return MovieTileWidget(
+                                movie: movies[index],
+                                image: movies[index].poster != null
+                                    ? movies[index].poster
+                                    : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
+                                name: movies[index].title,
+                              );
+                            }),
+                      ),
+                      CircularProgressIndicator(backgroundColor: kColorWhite)
+                          .visible(_newLoading)
+                          .centered()
+                          .pSymmetric(v: 20)
+                    ],
+                  ),
                 ),
-              ),
+        ),
       ),
     );
   }

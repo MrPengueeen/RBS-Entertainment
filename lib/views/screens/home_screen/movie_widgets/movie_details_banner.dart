@@ -60,7 +60,7 @@ class _MovieBannerWidgetState extends State<MovieBannerWidget> {
                       child: Icon(
                         Icons.play_arrow_outlined,
                         color: kColorWhite,
-                        size: 40,
+                        size: 30,
                       ),
                     ),
                   ),
@@ -69,6 +69,7 @@ class _MovieBannerWidgetState extends State<MovieBannerWidget> {
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Watch Now')
                           .text
@@ -77,11 +78,53 @@ class _MovieBannerWidgetState extends State<MovieBannerWidget> {
                           .white
                           .make()
                           .pOnly(bottom: 7),
-                      Text('152 Minutes').text.white.make(),
+                      Text(widget.movie.duration).text.white.make(),
                     ],
                   ),
                 ],
               ),
+            ),
+          ),
+          Positioned(
+            top: 21,
+            left: 21,
+            child: RawMaterialButton(
+              fillColor: kColorWhite,
+              elevation: 50,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              constraints: BoxConstraints(minWidth: 0),
+              padding: EdgeInsets.all(11),
+              shape: CircleBorder(),
+              child: Center(
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                  size: 16,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+          Positioned(
+            top: 21,
+            right: 21,
+            child: RawMaterialButton(
+              fillColor: kColorWhite,
+              elevation: 50,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              constraints: BoxConstraints(minWidth: 0),
+              padding: EdgeInsets.all(11),
+              shape: CircleBorder(),
+              child: Center(
+                child: Icon(
+                  Icons.favorite_outline,
+                  color: kColorRed,
+                  size: 16,
+                ),
+              ),
+              onPressed: () {},
             ),
           ),
         ],
