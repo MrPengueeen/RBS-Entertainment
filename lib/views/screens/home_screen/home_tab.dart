@@ -74,7 +74,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
                   children: [
                     HStack(
                       [
-                        Text('Latest Movies',
+                        Text('Recently Added',
                             style: TextStyle(
                               fontSize: 17,
                             )).text.white.bold.make().pOnly(bottom: 20),
@@ -100,7 +100,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
                       options: CarouselOptions(
                         scrollDirection: Axis.horizontal,
                         initialPage: 0,
-                        enableInfiniteScroll: false,
+                        enableInfiniteScroll: true,
                         viewportFraction: 0.65,
                         height: 470,
                         enlargeCenterPage: true,
@@ -130,7 +130,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
                     //     .toList()),
                     HStack(
                       [
-                        Text('Popular Movies',
+                        Text('Popular',
                             style: TextStyle(
                               fontSize: 17,
                             )).text.white.bold.make().pOnly(bottom: 20),

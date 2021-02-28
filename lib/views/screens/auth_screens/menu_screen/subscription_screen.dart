@@ -3,6 +3,7 @@ import 'package:RBS/models/subscription_model.dart';
 import 'package:RBS/services/network/api_handlers.dart';
 import 'package:RBS/services/network/rest_apis.dart';
 import 'package:RBS/views/screens/auth_screens/menu_screen/payment_screen.dart';
+import 'package:RBS/views/screens/auth_screens/sign_in_screen.dart';
 import 'package:RBS/views/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -111,7 +112,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                 });
                               } else {
                                 pushNewScreen(context,
-                                    screen: WelcomeScreen(), withNavBar: false);
+                                    screen: SignInScreen(), withNavBar: false);
                               }
                             },
                           );

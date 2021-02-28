@@ -1,6 +1,7 @@
 import 'package:RBS/colors.dart';
 import 'package:RBS/models/movie_model.dart';
 import 'package:RBS/services/network/api_handlers.dart';
+import 'package:RBS/views/screens/auth_screens/sign_in_screen.dart';
 import 'package:RBS/views/screens/home_screen/movie_widgets/play_movie.dart';
 import 'package:RBS/views/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -138,7 +139,7 @@ class _MovieBannerWidgetState extends State<MovieBannerWidget> {
       context,
       screen: isLoggedIn
           ? PlayMovieScreen(url: widget.movie.video)
-          : WelcomeScreen(),
+          : SignInScreen(),
       withNavBar: false, // OPTIONAL VALUE. True by default.
       pageTransitionAnimation: PageTransitionAnimation.cupertino,
     );

@@ -17,13 +17,12 @@ class BottomNavigationBarScreen extends StatefulWidget {
   BottomNavigationBarScreen({Key key}) : super(key: key);
 
   @override
-  _BottomNavigationBarScreenState createState() =>
-      _BottomNavigationBarScreenState();
+  BottomNavigationBarScreenState createState() =>
+      BottomNavigationBarScreenState();
 }
 
-class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
-  PersistentTabController _controller =
-      PersistentTabController(initialIndex: 0);
+class BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
+  PersistentTabController controller = PersistentTabController(initialIndex: 0);
 
   List<MenuModel> menuItems = List<MenuModel>();
   bool isLoading = true;
@@ -96,7 +95,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           )
         : PersistentTabView(
             context,
-            controller: _controller,
+            controller: controller,
             screens: _buildScreens(),
             items: _navBarsItems(),
             confineInSafeArea: true,

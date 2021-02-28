@@ -128,7 +128,7 @@ class _MovieTabState extends State<MovieTab>
                     children: [
                       HStack(
                         [
-                          Text('Latest ${widget.menu.title}',
+                          Text('Recently Added',
                               style: TextStyle(
                                 fontSize: 17,
                               )).text.white.bold.make().pOnly(bottom: 20),
