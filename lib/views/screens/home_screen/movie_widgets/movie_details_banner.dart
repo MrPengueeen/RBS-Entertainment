@@ -138,7 +138,10 @@ class _MovieBannerWidgetState extends State<MovieBannerWidget> {
     pushNewScreen(
       context,
       screen: isLoggedIn
-          ? PlayMovieScreen(url: widget.movie.video)
+          ? MovieDetailsScreenTest(
+              movie: widget.movie,
+            )
+          //PlayMovieScreen(url: widget.movie.video)
           : SignInScreen(),
       withNavBar: false, // OPTIONAL VALUE. True by default.
       pageTransitionAnimation: PageTransitionAnimation.cupertino,

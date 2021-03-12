@@ -22,6 +22,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
   //List<MovieModel> movies = List<MovieModel>();
   List<MovieModel> latestMovies = List<MovieModel>();
   List<MovieModel> popularMovies = List<MovieModel>();
+  List<MovieTileBigWidget> slider = List<MovieTileBigWidget>();
 
   @override
   void initState() {
@@ -34,6 +35,20 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
     getLatestMoviesForAll().then((response) {
       latestMovies = (response['results'] as List)
           .map((e) => MovieModel.fromJson(e))
+          .toList();
+      slider = latestMovies
+          .map(
+            (e) => MovieTileBigWidget(
+              movie: e,
+              rating: e.rating.toString(),
+              genre: e.genre,
+              image: e.poster != null
+                  ? e.poster
+                  : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
+              name: e.title,
+              reviews: 36,
+            ),
+          )
           .toList();
 
       getPopularMoviesForAll().then((response) {
@@ -85,28 +100,44 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
                       ],
                       alignment: MainAxisAlignment.spaceBetween,
                     ),
-                    CarouselSlider.builder(
-                      itemCount: latestMovies.length,
-                      itemBuilder: (_, index, initial) => MovieTileBigWidget(
-                        movie: latestMovies[index],
-                        rating: latestMovies[index].rating.toString(),
-                        genre: latestMovies[index].genre,
-                        image: latestMovies[index].poster != null
-                            ? latestMovies[index].poster
-                            : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
-                        name: latestMovies[index].title,
-                        reviews: 36,
-                      ),
-                      options: CarouselOptions(
-                        scrollDirection: Axis.horizontal,
-                        initialPage: 0,
-                        enableInfiniteScroll: true,
-                        viewportFraction: 0.65,
-                        height: 470,
-                        enlargeCenterPage: true,
-                        enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                      ),
+
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CarouselSlider(
+                          options: CarouselOptions(
+                            viewportFraction: 0.65,
+                            autoPlay: false,
+                            aspectRatio: 0.89,
+                            enlargeCenterPage: true,
+                            enableInfiniteScroll: true,
+                          ),
+                          items: slider,
+                        ),
+                      ],
                     ),
+                    // CarouselSlider.builder(
+                    //   itemCount: latestMovies.length,
+                    //   itemBuilder: (_, index, initial) => MovieTileBigWidget(
+                    //     movie: latestMovies[index],
+                    //     rating: latestMovies[index].rating.toString(),
+                    //     genre: latestMovies[index].genre,
+                    //     image: latestMovies[index].poster != null
+                    //         ? latestMovies[index].poster
+                    //         : 'https://image.freepik.com/free-psd/movie-poster-mockup_1390-698.jpg?1',
+                    //     name: latestMovies[index].title,
+                    //     reviews: 36,
+                    //   ),
+                    //   options: CarouselOptions(
+                    //     scrollDirection: Axis.horizontal,
+                    //     initialPage: 0,
+                    //     enableInfiniteScroll: true,
+                    //     viewportFraction: 0.65,
+                    //     height: 470,
+                    //     enlargeCenterPage: true,
+                    //     enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                    //   ),
+                    // ),
                     // CarouselSlider(
                     //     options: CarouselOptions(
                     //       scrollDirection: Axis.horizontal,

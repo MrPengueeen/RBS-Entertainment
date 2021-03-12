@@ -154,7 +154,7 @@ class _MovieTabState extends State<MovieTab>
                         options: CarouselOptions(
                           scrollDirection: Axis.horizontal,
                           initialPage: 0,
-                          enableInfiniteScroll: false,
+                          enableInfiniteScroll: true,
                           viewportFraction: 0.65,
                           height: 470,
                           enlargeCenterPage: true,
