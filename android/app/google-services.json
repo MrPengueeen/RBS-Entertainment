@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "536022511138",
+    "project_id": "rbs-entertainment",
+    "storage_bucket": "rbs-entertainment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536022511138:android:e45fdbea2e6c624e59247b",
+        "android_client_info": {
+          "package_name": "com.example.RBS"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536022511138-325bsoe2ibed272bomap62k7ma8flptt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.RBS",
+            "certificate_hash": "f5e4d357c442713bf5ffc80050a7dd70a061876c"
+          }
+        },
+        {
+          "client_id": "536022511138-7n9gcho99hhekonv8697rqkl16q2qhdc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB86M9O-1DMyQY8pc_u3BK2-FNhqGKe2JY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536022511138-7n9gcho99hhekonv8697rqkl16q2qhdc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

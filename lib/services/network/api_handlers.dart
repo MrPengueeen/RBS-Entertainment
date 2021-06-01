@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:http_parser/http_parser.dart';
 
-const BaseUrl = 'http://167.86.115.146:8099/api/v1/';
+const BaseUrl = 'http://188.166.219.196:8099/api/v1/';
 const noInternetMsg = 'You are not connected to Internet';
 const errorMsg = 'Please try again later.';
 
@@ -42,11 +42,11 @@ Future<Response> getRequest(String endPoint,
     print('Header: $headers');
 
     if (bearerToken) {
-      response = await get('$BaseUrl$endPoint', headers: headers);
+      response = await get(Uri.parse('$BaseUrl$endPoint'), headers: headers);
     } else if (noBaseUrl) {
-      response = await get('$endPoint');
+      response = await get(Uri.parse('$endPoint'));
     } else {
-      response = await get('$BaseUrl$endPoint');
+      response = await get(Uri.parse('$BaseUrl$endPoint'));
     }
 
     print('Response: ${response.statusCode} ${response.body}');
@@ -79,8 +79,8 @@ postRequest(
     }
 
     print("Headers: $headers");
-    Response response =
-        await post('$BaseUrl' + '$endPoint', body: request, headers: headers);
+    Response response = await post(Uri.parse('$BaseUrl' + '$endPoint'),
+        body: request, headers: headers);
     print('Response: ${response.statusCode} ${response.body}');
     return response;
   } else {
@@ -111,8 +111,8 @@ putRequest(
     }
 
     print("Headers: $headers");
-    Response response =
-        await put('$BaseUrl' + '$endPoint', body: request, headers: headers);
+    Response response = await put(Uri.parse('$BaseUrl' + '$endPoint'),
+        body: request, headers: headers);
     print('Response: ${response.statusCode} ${response.body}');
     return response;
   } else {
@@ -226,7 +226,7 @@ deleteRequest(String endPoint,
 
     print(headers);
     Response response =
-        await delete('$BaseUrl' + '$endPoint', headers: headers);
+        await delete(Uri.parse('$BaseUrl' + '$endPoint'), headers: headers);
     print('Response: ${response.statusCode} ${response.body}');
     return response;
   } else {

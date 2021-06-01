@@ -86,18 +86,16 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                             builder: (_) => PaymentWebView(
                                                   form: form,
                                                 )));
-                                    VxToast.show(context,
-                                        msg: 'Checking transaction status',
-                                        showTime: 3000);
+                                    toast('Checking transaction status');
+
                                     Map<dynamic, dynamic> request = {
                                       'txID': txID
                                     };
                                     getTransactionStatus(request)
                                         .then((response) {
-                                      VxToast.show(context,
-                                          msg:
-                                              'Your payment for the subscription plan ${packages[index].name} is ${response['status']}',
-                                          showTime: 4000);
+                                      toast(
+                                          'Your payment for the subscription plan ${packages[index].name} is ${response['status']}',
+                                          length: Toast.LENGTH_LONG);
                                     });
                                     setState(() {
                                       isLoading = false;

@@ -61,26 +61,26 @@ class BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
       PersistentBottomNavBarItem(
         icon: Icon(CustomIcons.home),
         title: ("Home"),
-        activeColor: kColorRed,
-        inactiveColor: CupertinoColors.systemGrey,
+        activeColorPrimary: kColorRed,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CustomIcons.search),
         title: ("Search"),
-        activeColor: kColorRed,
-        inactiveColor: CupertinoColors.systemGrey,
+        activeColorPrimary: kColorRed,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CustomIcons.download),
         title: ("Downloads"),
-        activeColor: kColorRed,
-        inactiveColor: CupertinoColors.systemGrey,
+        activeColorPrimary: kColorRed,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CustomIcons.menu),
         title: ("Menu"),
-        activeColor: kColorRed,
-        inactiveColor: CupertinoColors.systemGrey,
+        activeColorPrimary: kColorRed,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
     ];
   }

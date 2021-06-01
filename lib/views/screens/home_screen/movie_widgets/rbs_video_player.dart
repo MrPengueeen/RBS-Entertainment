@@ -44,7 +44,6 @@ class _MoviePlayerState extends State<MoviePlayer> {
               var size = MediaQuery.of(context).size;
               return Scaffold(
                 backgroundColor: Colors.black,
-                resizeToAvoidBottomPadding: false,
                 body: Stack(
                   children: [
                     Container(

@@ -1,11 +1,13 @@
 import 'package:RBS/colors.dart';
-import 'package:RBS/constants.dart';
-import 'package:RBS/services/network/api_handlers.dart';
+
+import 'package:RBS/main.dart';
+
 import 'package:RBS/views/screens/bottom_navbar_screen.dart';
-import 'package:RBS/views/screens/welcome_screen.dart';
-import 'package:RBS/views/shared_widgets/loading.dart';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:nb_utils/nb_utils.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 import 'package:velocity_x/velocity_x.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,10 +16,37 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    // Notification handling
+
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   RemoteNotification notification = message.notification;
+    //   AndroidNotification android = message.notification?.android;
+
+    //   if (notification != null && android != null) {
+    //     flutterLocalNotificationsPlugin.show(
+    //         notification.hashCode,
+    //         notification.title,
+    //         notification.body,
+    //         NotificationDetails(
+    //           android: AndroidNotificationDetails(
+    //             channel.id,
+    //             channel.name,
+    //             channel.description,
+    //             importance: Importance.max,
+    //             priority: Priority.max,
+    //             // TODO add a proper drawable resource to android, for now using
+    //             //      one that already exists in example app.
+    //           ),
+    //         ));
+    //   }
+    // });
+
     Future.delayed(Duration(seconds: 4), () async {
       // bool isLoggedIn = await getBool(LOGGED_IN, defaultValue: false);
 

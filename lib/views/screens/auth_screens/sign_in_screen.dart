@@ -9,6 +9,9 @@ import 'package:RBS/views/screens/bottom_navbar_screen.dart';
 import 'package:RBS/views/shared_widgets/button_widget.dart';
 import 'package:RBS/views/shared_widgets/custom_button.dart';
 import 'package:RBS/views/shared_widgets/custom_textfield.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -23,6 +26,9 @@ class _SignInScreenState extends State<SignInScreen> {
   String _email = '';
 
   String _password = '';
+  String fcmToken = '';
+  String deviceDetails;
+  static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
   bool isLoading = false;
 
@@ -102,18 +108,26 @@ class _SignInScreenState extends State<SignInScreen> {
                                     setState(() {
                                       isLoading = true;
                                     });
+                                    fcmToken = await FirebaseMessaging.instance
+                                        .getToken();
+                                    var details = _readAndroidBuildData(
+                                        await deviceInfoPlugin.androidInfo);
 
                                     var request = {
                                       'username': _email.trim(),
-                                      'password': _password
+                                      'password': _password,
+                                      'fcm_token': fcmToken,
+                                      'details':
+                                          "${details['brand']} ${details['device']}  ",
                                     };
 
                                     signInUser(request).then((response) {
                                       setString(ACCESS, response['token']);
                                       setBool(LOGGED_IN, true);
                                       setString(USERNAME, response['username']);
-                                      VxToast.show(context,
-                                          msg: 'Login Successful');
+                                      toast('Login successful');
+                                      // VxToast.show(context,
+                                      //     msg: 'Login Successful');
                                       setState(() {
                                         isLoading = false;
                                       });
@@ -166,5 +180,14 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       ),
     );
+  }
+
+  Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
+    return <String, dynamic>{
+      'OS': build.version.baseOS,
+      'brand': build.brand,
+      'device': build.model,
+      'display': build.display,
+    };
   }
 }

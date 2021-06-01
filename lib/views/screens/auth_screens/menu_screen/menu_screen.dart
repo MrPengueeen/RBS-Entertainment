@@ -58,6 +58,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 .onInkTap(() {
               pushNewScreen(
                 context,
+
                 screen: NotificationScreen(),
                 withNavBar: true, // OPTIONAL VALUE. True by default.
                 pageTransitionAnimation: PageTransitionAnimation.cupertino,

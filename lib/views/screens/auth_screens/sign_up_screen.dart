@@ -166,8 +166,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   request['email'] = _email.trim();
                                 }
                                 registerUser(request).then((response) {
-                                  VxToast.show(context,
-                                      msg: 'Sign-up successful');
+                                  toast('Sign up successful');
+                                  // VxToast.show(context,
+                                  //     msg: 'Sign-up successful');
                                   setState(() {
                                     isLoading = false;
                                   });
